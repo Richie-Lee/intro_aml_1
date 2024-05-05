@@ -8,6 +8,6 @@ inputs:
     path: azureml://datastores/amllearning_datastore/paths/diabetes-dev.csv
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: t-richielee-aml-learning
+compute: aml-learning-compute-cluster
 experiment_name: diabetes-data-example
 description: Train a classification model on diabetes data using a registered dataset as input.

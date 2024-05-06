@@ -37,7 +37,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Train model on dev data
-        run: python src/model/train.py --data-folder experimentation/diabetes-dev.csv
+        run: python src/model/train.py --training_data experimentation --reg_rate 0.01
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -57,6 +57,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Train model on prod data
-        run: python src/model/train.py --data-folder production/diabetes-prod.csv
+        run: python src/model/train.py --training_data production --reg_rate 0.01
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}

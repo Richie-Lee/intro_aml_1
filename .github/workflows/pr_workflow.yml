@@ -39,7 +39,7 @@ jobs:
       - name: List files in the development data directory
         run: ls -la experimentation
       - name: Train model on dev data
-        run: python src/model/train.py --training_data experimentation
+        run: python src/model/train.py --training_data experimentation/data
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 

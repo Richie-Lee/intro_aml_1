@@ -62,4 +62,5 @@ jobs:
         run: ls -la production
       - name: Train model on prod data
         run: python src/model/train.py --training_data production
+        env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}

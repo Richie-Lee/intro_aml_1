@@ -35,8 +35,8 @@ def get_csvs_df(path):
 def split_data(df):
     # Define dependent/independent variables
     columns = [
-        'Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure', 
-        'TricepsThickness', 'SerumInsulin', 'BMI', 
+        'Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure',
+        'TricepsThickness', 'SerumInsulin', 'BMI',
         'DiabetesPedigree', 'Age'
     ]
     X = df[columns].values

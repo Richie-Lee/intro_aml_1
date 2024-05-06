@@ -61,6 +61,6 @@ jobs:
       - name: List files in the production data directory
         run: ls -la production
       - name: Train model on prod data
-        run: python src/model/train.py --training_data production
+        run: python src/model/train.py --training_data production/data
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}

@@ -1,27 +1,58 @@
 name: Pull Request Workflow
 on:
-  pull_request:
+  push:
     branches:
       - main
 
 jobs:
-  build:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
       - name: Lint with flake8
         run: flake8 .
-
       - name: Run tests with pytest
         run: pytest tests/
+
+  experiment:
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    environment: development
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install Azure ML SDK
+        run: pip install azureml-sdk
+      - name: Train model on dev data
+        run: python train.py --data-folder experimentation/diabetes-dev.csv
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+
+  production:
+    runs-on: ubuntu-latest
+    needs: experiment
+    environment: production
+    if: success()
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install Azure ML SDK
+        run: pip install azureml-sdk
+      - name: Train model on prod data
+        run: python train.py --data-folder production/diabetes-prod.csv
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}

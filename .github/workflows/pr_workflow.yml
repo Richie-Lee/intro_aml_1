@@ -32,8 +32,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - name: Install Azure ML SDK
-        run: pip install azureml-sdk
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Train model on dev data
         run: python src/model/train.py --data-folder experimentation/diabetes-dev.csv
         env:
@@ -50,8 +52,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      - name: Install Azure ML SDK
-        run: pip install azureml-sdk
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Train model on prod data
         run: python src/model/train.py --data-folder production/diabetes-prod.csv
         env:

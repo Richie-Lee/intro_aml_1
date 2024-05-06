@@ -35,7 +35,7 @@ jobs:
       - name: Install Azure ML SDK
         run: pip install azureml-sdk
       - name: Train model on dev data
-        run: python train.py --data-folder experimentation
+        run: python src/model/train.py --data-folder experimentation/diabetes-dev.csv
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -53,6 +53,6 @@ jobs:
       - name: Install Azure ML SDK
         run: pip install azureml-sdk
       - name: Train model on prod data
-        run: python train.py --data-folder production
+        run: python src/model/train.py --data-folder production/diabetes-prod.csv
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}

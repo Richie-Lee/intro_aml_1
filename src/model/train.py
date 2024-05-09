@@ -11,13 +11,22 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
 import mlflow
-from mlflow import sklearn as mlflow_sklearn
 
-# Set the tracking URI for MLflow to point to Azure ML
-mlflow.set_tracking_uri("azureml://westeurope.api.azureml.ms/mlflow/v1.0/subscriptions/80022744-ad47-4e29-838f-f2a430203d84/resourceGroups/aml_learning_path/providers/Microsoft.MachineLearningServices/workspaces/aml_learning_path_1")
+# Construct the tracking URI for MLflow
+tracking_uri = (
+    "azureml://westeurope.api.azureml.ms/mlflow/v1.0/"
+    "subscriptions/80022744-ad47-4e29-838f-f2a430203d84/"
+    "resourceGroups/aml_learning_path/"
+    "providers/Microsoft.MachineLearningServices/"
+    "workspaces/aml_learning_path_1"
+)
+
+# Set the tracking URI for MLflow
+mlflow.set_tracking_uri(tracking_uri)
 
 # Set the experiment name
 mlflow.set_experiment("My-Azure-ML-Experiment")
+
 
 # define functions
 def main(args):
